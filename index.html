@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sami Ul Haq Member of Fancy Bear| Elite Cyber Operations</title>
+    <title>Sami Ul Haq | Elite Cyber Operations</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
@@ -18,270 +18,185 @@
 
         /* Matrix Rain Effect Background */
         .matrix-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 255, 65, 0.03) 0px,
-                rgba(0, 255, 65, 0.03) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            z-index: -1;
-            pointer-events: none;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: repeating-linear-gradient(0deg, rgba(0, 255, 65, 0.03) 0px, rgba(0, 255, 65, 0.03) 1px, transparent 1px, transparent 2px);
+            z-index: -1; pointer-events: none;
         }
 
-        header {
-            text-align: center;
-            padding: 60px 20px 30px;
-            border-bottom: 2px solid #00ff41;
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
-            background: rgba(5, 5, 5, 0.9);
+        /* --- LOGIN SCREEN CSS --- */
+        #login-screen {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-color: #050505; z-index: 9999;
+            display: flex; justify-content: center; align-items: center; flex-direction: column;
         }
-
-        h1 {
-            font-size: 3em;
-            margin: 0;
-            color: #ffffff;
-            text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        
+        .login-box {
+            background: #0a0a0a; border: 2px solid #00ff41; padding: 40px;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.3); text-align: center; width: 300px;
         }
-
-        .glitch-subtitle {
-            font-size: 1.2em;
-            color: #ff003c;
-            margin-top: 10px;
-            text-shadow: 0 0 5px #ff003c;
+        
+        .login-box h2 { color: #fff; text-shadow: 0 0 10px #ff003c; margin-top: 0; border-bottom: none; letter-spacing: 2px; }
+        .login-box p { color: #888; font-size: 0.9em; margin-bottom: 30px; }
+        
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; color: #00ff41; margin-bottom: 5px; font-size: 0.8em; }
+        .input-group input {
+            width: 100%; background: #000; border: 1px solid #333; color: #00ff41;
+            padding: 10px; font-family: 'Share Tech Mono', monospace; box-sizing: border-box; outline: none;
         }
-
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
+        .input-group input:focus { border-color: #00ff41; box-shadow: 0 0 10px rgba(0, 255, 65, 0.2); }
+        
+        .login-btn {
+            background: transparent; color: #00ff41; border: 2px solid #00ff41;
+            padding: 10px 20px; font-family: 'Share Tech Mono', monospace; width: 100%;
+            cursor: pointer; font-size: 1.1em; transition: 0.3s; margin-top: 10px; text-transform: uppercase;
         }
+        .login-btn:hover { background: #00ff41; color: #000; }
+        
+        #error-msg { color: #ff003c; margin-top: 15px; font-size: 0.85em; text-shadow: 0 0 5px #ff003c; min-height: 20px; }
 
-        .terminal-window {
-            background-color: #0a0a0a;
-            border: 1px solid #333;
-            border-radius: 5px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-            margin-bottom: 40px;
-            position: relative;
-        }
+        /* --- MAIN CONTENT (Hidden by default) --- */
+        #main-content { display: none; }
 
-        .terminal-header {
-            background-color: #1a1a1a;
-            padding: 10px;
-            border-bottom: 1px solid #333;
-            display: flex;
-            align-items: center;
-        }
-
-        .terminal-button {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-        .btn-red { background-color: #ff5f56; }
-        .btn-yellow { background-color: #ffbd2e; }
-        .btn-green { background-color: #27c93f; }
-
-        .terminal-title {
-            color: #888;
-            font-size: 0.9em;
-            margin-left: 15px;
-        }
-
-        .terminal-content {
-            padding: 20px;
-            line-height: 1.6;
-        }
-
-        .prompt::before {
-            content: "root@sami-server:~# ";
-            color: #ff003c;
-        }
-
-        .typing-animation {
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 2px solid #00ff41;
-            animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
-        }
-
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #00ff41; } }
-
-        /* Services Grid */
-        h2 {
-            color: #ffffff;
-            text-shadow: 0 0 5px #ffffff;
-            border-bottom: 1px dashed #00ff41;
-            padding-bottom: 10px;
-            margin-top: 0;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .service-card {
-            background: #111;
-            border: 1px solid #00ff41;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card:hover {
-            background: #00ff41;
-            color: #000;
-            box-shadow: 0 0 20px #00ff41;
-            transform: scale(1.05);
-        }
-
-        .service-card:hover h3, .service-card:hover .price {
-            color: #000;
-            text-shadow: none;
-        }
-
-        .service-card h3 {
-            font-size: 1.5em;
-            margin: 0 0 15px 0;
-            color: #00ff41;
-            text-transform: uppercase;
-        }
-
-        .price {
-            font-size: 2em;
-            font-weight: bold;
-            color: #ffffff;
-            text-shadow: 0 0 5px #00ff41;
-            margin-bottom: 10px;
-        }
-
-        .status {
-            font-size: 0.9em;
-            color: #888;
-        }
+        header { text-align: center; padding: 60px 20px 30px; border-bottom: 2px solid #00ff41; box-shadow: 0 0 15px rgba(0, 255, 65, 0.2); background: rgba(5, 5, 5, 0.9); }
+        h1 { font-size: 3em; margin: 0; color: #ffffff; text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41; letter-spacing: 2px; text-transform: uppercase; }
+        .glitch-subtitle { font-size: 1.2em; color: #ff003c; margin-top: 10px; text-shadow: 0 0 5px #ff003c; }
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        .terminal-window { background-color: #0a0a0a; border: 1px solid #333; border-radius: 5px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.8); margin-bottom: 40px; }
+        .terminal-header { background-color: #1a1a1a; padding: 10px; border-bottom: 1px solid #333; display: flex; align-items: center; }
+        .terminal-button { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+        .btn-red { background-color: #ff5f56; } .btn-yellow { background-color: #ffbd2e; } .btn-green { background-color: #27c93f; }
+        .terminal-title { color: #888; font-size: 0.9em; margin-left: 15px; }
+        .terminal-content { padding: 20px; line-height: 1.6; }
+        .prompt::before { content: "root@sami-server:~# "; color: #ff003c; }
+        h2 { color: #ffffff; text-shadow: 0 0 5px #ffffff; border-bottom: 1px dashed #00ff41; padding-bottom: 10px; margin-top: 0; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+        .service-card { background: #111; border: 1px solid #00ff41; padding: 25px; text-align: center; transition: all 0.3s ease; }
+        .service-card:hover { background: #00ff41; color: #000; box-shadow: 0 0 20px #00ff41; transform: scale(1.05); }
+        .service-card:hover h3, .service-card:hover .price { color: #000; text-shadow: none; }
+        .service-card h3 { font-size: 1.5em; margin: 0 0 15px 0; color: #00ff41; text-transform: uppercase; }
+        .price { font-size: 2em; font-weight: bold; color: #ffffff; text-shadow: 0 0 5px #00ff41; margin-bottom: 10px; }
+        .status { font-size: 0.9em; color: #888; }
         .service-card:hover .status { color: #333; }
-
-        /* Contact Section */
-        .contact-info {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 1.2em;
-        }
-        
-        .contact-info a {
-            color: #ff003c;
-            text-decoration: none;
-            text-shadow: 0 0 5px #ff003c;
-            transition: 0.3s;
-        }
-        
-        .contact-info a:hover {
-            color: #ffffff;
-            text-shadow: 0 0 10px #ffffff;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #444;
-            font-size: 0.8em;
-            margin-top: 50px;
-            border-top: 1px solid #111;
-        }
+        .contact-info { text-align: center; margin-top: 20px; font-size: 1.2em; }
+        .contact-info a { color: #ff003c; text-decoration: none; text-shadow: 0 0 5px #ff003c; transition: 0.3s; }
+        .contact-info a:hover { color: #ffffff; text-shadow: 0 0 10px #ffffff; }
+        footer { text-align: center; padding: 20px; color: #444; font-size: 0.8em; margin-top: 50px; border-top: 1px solid #111; }
     </style>
 </head>
 <body>
     <div class="matrix-bg"></div>
 
-    <header>
-        <h1>Sami Ul Haq</h1>
-        <div class="glitch-subtitle">>> ELITE CYBER EXPLOITATION & RECOVERY <<</div>
-    </header>
-
-    <div class="container">
-        
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <div class="terminal-button btn-red"></div>
-                <div class="terminal-button btn-yellow"></div>
-                <div class="terminal-button btn-green"></div>
-                <div class="terminal-title">bash - root@sami-server</div>
+    <div id="login-screen">
+        <div class="login-box">
+            <h2>RESTRICTED AREA</h2>
+            <p>Sami-Server Authentication Required</p>
+            
+            <div class="input-group">
+                <label>USERNAME</label>
+                <input type="text" id="usernameInput" autocomplete="off" spellcheck="false">
             </div>
-            <div class="terminal-content">
-                <p class="prompt">whoami</p>
-                <p>> Sami Ul Haq. Independent Security Contractor. Exploitation Specialist.</p>
-                <br>
-                <p class="prompt">cat disclaimer.txt</p>
-                <p>> I bypass security protocols. I provide access. Discreet, fast, and professional. No questions asked. You pay, I deliver.</p>
-                <br>
-                <p class="prompt">./execute_services.sh <span class="typing-animation">Loading modules... DONE.</span></p>
+            
+            <div class="input-group">
+                <label>PASSWORD</label>
+                <input type="password" id="passwordInput">
             </div>
+            
+            <button class="login-btn" onclick="checkLogin()">INITIATE CONNECTION</button>
+            <div id="error-msg"></div>
         </div>
-
-        <div class="terminal-window">
-            <div class="terminal-content">
-                <h2>TARGET ACQUISITION PRICING</h2>
-                <div class="services-grid">
-                    
-                    <div class="service-card">
-                        <h3>Instagram</h3>
-                        <div class="price">$300</div>
-                        <div class="status">[ Status: EXPLOITABLE ]</div>
-                        <p>Full account access, DMs, hidden media recovery.</p>
-                    </div>
-
-                    <div class="service-card">
-                        <h3>Snapchat</h3>
-                        <div class="price">$400</div>
-                        <div class="status">[ Status: EXPLOITABLE ]</div>
-                        <p>My Eyes Only bypass, deleted snap recovery, live monitoring.</p>
-                    </div>
-
-                    <div class="service-card">
-                        <h3>Facebook</h3>
-                        <div class="price">$700</div>
-                        <div class="status">[ Status: EXPLOITABLE ]</div>
-                        <p>Complete profile takeover, Messenger extraction, group admin access.</p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="terminal-window">
-            <div class="terminal-content">
-                <h2>INITIATE SECURE COMMS</h2>
-                <p style="text-align: center; color: #888;">Send target details and await payment instructions.</p>
-                <div class="contact-info">
-                    <p class="prompt">Email: <a href="mailto:samiulhaq173@gmail.com">samiulhaq173@gmail.com</a></p>
-                </div>
-            </div>
-        </div>
-
     </div>
-        <div style="text-align: center; margin-top: 40px; margin-bottom: 20px;">
-            <a href="apps.html" style="background: #000; color: #00ff41; border: 2px solid #00ff41; padding: 15px 30px; font-size: 1.5em; text-decoration: none; font-family: 'Share Tech Mono', monospace; text-transform: uppercase; transition: 0.3s; display: inline-block; box-shadow: 0 0 10px #00ff41;">
-                [ ACCESS MY APPS / PAYLOADS ]
-            </a>
+
+    <div id="main-content">
+        <header>
+            <h1>Sami Ul Haq</h1>
+            <div class="glitch-subtitle">>> ELITE CYBER EXPLOITATION & RECOVERY <<</div>
+        </header>
+
+        <div class="container">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-button btn-red"></div>
+                    <div class="terminal-button btn-yellow"></div>
+                    <div class="terminal-button btn-green"></div>
+                    <div class="terminal-title">bash - root@sami-server</div>
+                </div>
+                <div class="terminal-content">
+                    <p class="prompt">whoami</p>
+                    <p>> Sami Ul Haq. Independent Security Contractor. Exploitation Specialist.</p>
+                    <br>
+                    <p class="prompt">cat disclaimer.txt</p>
+                    <p>> I bypass security protocols. I provide access. Discreet, fast, and professional. No questions asked. You pay, I deliver.</p>
+                </div>
+            </div>
+
+            <div class="terminal-window">
+                <div class="terminal-content">
+                    <h2>TARGET ACQUISITION PRICING</h2>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <h3>Instagram</h3>
+                            <div class="price">$300</div>
+                            <div class="status">[ Status: EXPLOITABLE ]</div>
+                            <p>Full account access, DMs, hidden media recovery.</p>
+                        </div>
+                        <div class="service-card">
+                            <h3>Snapchat</h3>
+                            <div class="price">$400</div>
+                            <div class="status">[ Status: EXPLOITABLE ]</div>
+                            <p>My Eyes Only bypass, deleted snap recovery, live monitoring.</p>
+                        </div>
+                        <div class="service-card">
+                            <h3>Facebook</h3>
+                            <div class="price">$700</div>
+                            <div class="status">[ Status: EXPLOITABLE ]</div>
+                            <p>Complete profile takeover, Messenger extraction, group admin access.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="terminal-window">
+                <div class="terminal-content">
+                    <h2>INITIATE SECURE COMMS</h2>
+                    <p style="text-align: center; color: #888;">Send target details and await payment instructions.</p>
+                    <div class="contact-info">
+                        <p class="prompt">Email: <a href="mailto:samiulhaq173@gmail.com">samiulhaq173@gmail.com</a></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px; margin-bottom: 20px;">
+                <a href="apps.html" style="background: #000; color: #00ff41; border: 2px solid #00ff41; padding: 15px 30px; font-size: 1.5em; text-decoration: none; font-family: 'Share Tech Mono', monospace; text-transform: uppercase; transition: 0.3s; display: inline-block; box-shadow: 0 0 10px #00ff41;">
+                    [ ACCESS MY APPS / PAYLOADS ]
+                </a>
+            </div>
         </div>
 
-    <footer>
-        <p>SECURE CONNECTION ESTABLISHED. ALL TRAFFIC IS ENCRYPTED.</p>
-    </footer>
+        <footer>
+            <p>SECURE CONNECTION ESTABLISHED. ALL TRAFFIC IS ENCRYPTED.</p>
+        </footer>
+    </div>
+
+    <script>
+        function checkLogin() {
+            // Yahan apna Username aur Password set karo!
+            var correctUser = "client";  // <-- USERNAME
+            var correctPass = "sami123"; // <-- PASSWORD
+            
+            var userEntered = document.getElementById("usernameInput").value;
+            var passEntered = document.getElementById("passwordInput").value;
+            var errorDiv = document.getElementById("error-msg");
+
+            if (userEntered === correctUser && passEntered === correctPass) {
+                // Agar password theek hai to login screen ghaib aur website on!
+                document.getElementById("login-screen").style.display = "none";
+                document.getElementById("main-content").style.display = "block";
+            } else {
+                // Agar galat hai to error
+                errorDiv.innerText = ">> ACCESS DENIED. UNAUTHORIZED ATTEMPT LOGGED. <<";
+            }
+        }
+    </script>
 </body>
 </html>
