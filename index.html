@@ -54,7 +54,18 @@
         .login-btn:hover { background: #00ff41; color: #000; }
         
         #error-msg { color: #ff003c; margin-top: 15px; font-size: 0.85em; text-shadow: 0 0 5px #ff003c; min-height: 20px; }
-
+        /* --- NAVIGATION BUTTONS --- */
+        .nav-buttons-container {
+            display: flex; justify-content: center; gap: 20px; margin: 30px auto; padding: 0 20px; flex-wrap: wrap; max-width: 900px;
+        }
+        .nav-btn {
+            font-family: 'Share Tech Mono', monospace; font-size: 1.2em; padding: 15px 25px; text-decoration: none; text-transform: uppercase; transition: all 0.3s ease; text-align: center; flex: 1; min-width: 250px; letter-spacing: 1px;
+        }
+        .btn-primary { background: rgba(0, 255, 65, 0.05); color: #00ff41; border: 1px solid #00ff41; box-shadow: 0 0 10px rgba(0, 255, 65, 0.2); }
+        .btn-primary:hover { background: #00ff41; color: #000; box-shadow: 0 0 20px rgba(0, 255, 65, 0.6); font-weight: bold; }
+        .btn-danger { background: rgba(255, 0, 60, 0.05); color: #ff003c; border: 1px solid #ff003c; box-shadow: 0 0 10px rgba(255, 0, 60, 0.2); }
+        .btn-danger:hover { background: #ff003c; color: #fff; box-shadow: 0 0 20px rgba(255, 0, 60, 0.8); font-weight: bold; }
+            
         /* --- MAIN CONTENT (Hidden by default) --- */
         #main-content { display: none; }
 
