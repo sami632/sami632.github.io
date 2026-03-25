@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sami Ul Haq | Nuclear Data</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap'); /* Urdu Font */
+
+        body { background-color: #000; color: #ccc; font-family: 'Share Tech Mono', monospace; margin: 0; padding: 0; line-height: 1.6; }
+        header { background: #111; padding: 20px; border-bottom: 1px solid #ff003c; text-align: center; }
+        h1 { color: #ff003c; margin: 0; text-shadow: 0 0 10px #ff003c; }
+        .back-btn { color: #888; text-decoration: none; display: inline-block; margin-top: 10px; }
+        
+        .container { max-width: 800px; margin: 30px auto; padding: 20px; background: #0a0a0a; border: 1px solid #333; box-shadow: 0 0 15px rgba(255,0,60,0.1); }
+        
+        /* Language Toggle Button */
+        .lang-controls { text-align: right; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .lang-btn { background: transparent; color: #ff003c; border: 1px solid #ff003c; padding: 8px 15px; cursor: pointer; font-family: inherit; font-size: 1em; transition: 0.3s; }
+        .lang-btn:hover { background: #ff003c; color: #000; }
+
+        /* Content Areas */
+        .content-area { display: none; }
+        .content-area.active { display: block; animation: fadeIn 0.5s; }
+        
+        /* Urdu Specific Styling */
+        .urdu-text { font-family: 'Noto Nastaliq Urdu', serif; direction: rtl; text-align: right; font-size: 1.2em; line-height: 2; }
+        
+        h2 { color: #fff; border-left: 3px solid #ff003c; padding-left: 10px; }
+        p { margin-bottom: 20px; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>RESTRICTED FILE: NUCLEAR.DOCX</h1>
+        <a href="knowledge.html" class="back-btn"><< BACK TO ARCHIVES</a>
+    </header>
+
+    <div class="container">
+        <div class="lang-controls">
+            <button class="lang-btn" onclick="toggleLanguage()">[ SWITCH TO URDU / اردو ]</button>
+        </div>
+
+        <div id="english-content" class="content-area active">
+            <h2>Warning: Classified Material</h2>
+            <p>Here you will paste your English text about Nuclear Weapons. You can write paragraphs, lists, or whatever you want your clients to read.</p>
+            <p>For example: The principles of nuclear fission involve the splitting of heavy atomic nuclei...</p>
+        </div>
+
+        <div id="urdu-content" class="content-area urdu-text">
+            <h2>انتباہ: خفیہ معلومات</h2>
+            <p>یہاں آپ اپنا اردو کا مواد پیسٹ کریں گے۔ آپ جو علم بھی اپنے کلائنٹس کو دینا چاہتے ہیں، وہ یہاں آئے گا۔</p>
+            <p>مثال کے طور پر: نیوکلیئر فشن کے اصولوں میں بھاری ایٹمی مرکزے کا ٹوٹنا شامل ہے...</p>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'en';
+        function toggleLanguage() {
+            const enContent = document.getElementById('english-content');
+            const urContent = document.getElementById('urdu-content');
+            const btn = document.querySelector('.lang-btn');
+
+            if (currentLang === 'en') {
+                enContent.classList.remove('active');
+                urContent.classList.add('active');
+                btn.innerText = "[ SWITCH TO ENGLISH ]";
+                currentLang = 'ur';
+            } else {
+                urContent.classList.remove('active');
+                enContent.classList.add('active');
+                btn.innerText = "[ SWITCH TO URDU / اردو ]";
+                currentLang = 'en';
+            }
+        }
+    </script>
+</body>
+</html>
