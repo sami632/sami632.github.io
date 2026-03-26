@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sami Ul Haq | LMC XML Configs</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        body { background-color: #050505; color: #00e5ff; font-family: 'Share Tech Mono', monospace; margin: 0; padding: 0; }
+        .matrix-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: repeating-linear-gradient( 0deg, rgba(0, 229, 255, 0.03) 0px, rgba(0, 229, 255, 0.03) 1px, transparent 1px, transparent 2px ); z-index: -1; }
+        header { text-align: center; padding: 40px 20px 20px; border-bottom: 2px solid #00e5ff; background: rgba(5, 5, 5, 0.9); }
+        h1 { font-size: 2.5em; margin: 0; color: #ffffff; text-shadow: 0 0 15px #00e5ff; text-transform: uppercase; }
+        .back-btn { color: #888; text-decoration: none; margin-top: 15px; display: inline-block; border-bottom: 1px dashed #888; }
+        .back-btn:hover { color: #00e5ff; border-color: #00e5ff; }
+        .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        .terminal-window { background-color: #0a0a0a; border: 1px solid #333; box-shadow: 0 0 20px rgba(0, 229, 255, 0.2); }
+        .terminal-header { background-color: #1a1a1a; padding: 10px; border-bottom: 1px solid #333; color: #888; }
+        
+        .config-list { padding: 20px; }
+        .config-item { background: #111; border-left: 4px solid #00e5ff; padding: 15px; margin-bottom: 15px; transition: 0.3s; display: flex; justify-content: space-between; align-items: center; }
+        .config-item:hover { background: #1a1a1a; border-left-color: #fff; box-shadow: 0 0 15px rgba(0, 229, 255, 0.2); }
+        .config-name { font-size: 1.2em; color: #fff; margin: 0; }
+        .config-desc { font-size: 0.9em; color: #888; margin: 5px 0 0 0; }
+        
+        .download-btn { background: transparent; color: #00e5ff; border: 1px solid #00e5ff; padding: 8px 15px; text-decoration: none; transition: 0.3s; cursor: pointer; text-transform: uppercase; }
+        .download-btn:hover { background: #00e5ff; color: #000; }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg"></div>
+    <header>
+        <h1>DIRECTORY: /configs/lmc_xml</h1>
+        <a href="index.html" class="back-btn"><< RETURN TO MAIN TERMINAL</a>
+    </header>
+    
+    <div class="container">
+        <div class="terminal-window">
+            <div class="terminal-header">root@sami-server:/var/configs# ls -la *.xml</div>
+            
+            <div class="config-list">
+                
+                <div class="config-item">
+                    <div>
+                        <p class="config-name">Dark_Night_Vision_v4.xml</p>
+                        <p class="config-desc">Optimized for low-light extraction & clarity.</p>
+                    </div>
+                    <a href="config1.xml" class="download-btn" download>[ DOWNLOAD XML ]</a>
+                </div>
+
+                <div class="config-item">
+                    <div>
+                        <p class="config-name">Sami_Ultra_Detail_Macro.xml</p>
+                        <p class="config-desc">High-contrast, high-sharpness configuration.</p>
+                    </div>
+                    <a href="config2.xml" class="download-btn" download>[ DOWNLOAD XML ]</a>
+                </div>
+
+                <div class="config-item">
+                    <div>
+                        <p class="config-name">Stealth_Mode_Color_Grade.xml</p>
+                        <p class="config-desc">Muted tones with high dynamic range.</p>
+                    </div>
+                    <a href="config3.xml" class="download-btn" download>[ DOWNLOAD XML ]</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
