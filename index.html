@@ -71,6 +71,92 @@
         .btn-cyan:hover { background: #00e5ff; color: #000; box-shadow: 0 0 20px rgba(0, 229, 255, 0.8); font-weight: bold; }
 
 
+        /* --- DIGITAL IDENTITY LOCK (PORTRAIT) --- */
+        .identity-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px auto;
+            max-width: 900px;
+            padding: 0 20px;
+            flex-direction: column; /* Stacks image and status text */
+        }
+
+        .portrait-frame {
+            position: relative;
+            width: 320px; /* Adjust size on mobile */
+            height: auto;
+            border: 2px solid #00ff41;
+            box-shadow: 0 0 25px rgba(0, 255, 65, 0.4);
+            background-color: #000;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .portrait-frame img {
+            width: 100%;
+            height: auto;
+            filter: grayscale(100%) brightness(1.1) contrast(1.2) drop-shadow(0 0 10px rgba(0,255,65,0.7)); /* B&W, stylized glow */
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* The complex neon digital overlay frame and pulsing effect */
+        .portrait-frame::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border-radius: inherit;
+            animation: identity-pulse 3s infinite alternate;
+            z-index: 2;
+            pointer-events: none;
+            background: 
+                /* Inner glow */
+                inset 0 0 60px rgba(0, 255, 65, 0.6),
+                /* Complex digital circuitry mask */
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M0 0h100v100H0z' fill='%23000'/%3E%3Cpath d='M5 5h90v90H5z' fill='none' stroke='%2300ff41' stroke-width='1.5'/%3E%3Cpath d='M15 15h70v70H15z' fill='none' stroke='%2300ff41' stroke-width='.75'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* Subtle Matrix rain overlay specifically for the portrait area */
+        .portrait-matrix-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient( 
+                0deg, 
+                rgba(0, 255, 65, 0.05) 0px, 
+                rgba(0, 255, 65, 0.05) 1px, 
+                transparent 1px, 
+                transparent 2px 
+            );
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        /* Status text styling */
+        .identity-status {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9em;
+            color: #00ff41;
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            padding: 10px 20px;
+            text-shadow: 0 0 5px #00ff41;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        /* Pulsing animation */
+        @keyframes identity-pulse {
+            from { box-shadow: inset 0 0 60px rgba(0, 255, 65, 0.6), 0 0 25px rgba(0, 255, 65, 0.2); }
+            to { box-shadow: inset 0 0 90px rgba(0, 255, 65, 0.9), 0 0 45px rgba(0, 255, 65, 0.4); }
+        }
 
 
         
@@ -141,6 +227,16 @@
             <a href="lmc.html" class="nav-btn btn-cyan">[ LMC CONFIGS (XML) ]</a>
 
         </div>
+                        <div class="identity-container">
+            <div class="portrait-frame">
+                <img src="Sami_Identity_v1.png" alt="Sami Ul Haq - Exploitation Specialist">
+                <div class="portrait-matrix-overlay"></div>
+            </div>
+            <div class="identity-status">
+                sami_verication: OK | access_level: ELITE | threat_level: HIGH
+            </div>
+                        </div>
+                
                 
         <div class="container">
             <div class="terminal-window">
