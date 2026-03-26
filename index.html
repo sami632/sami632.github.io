@@ -7,241 +7,62 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
-        body {
-            background-color: #050505;
-            color: #00ff41;
-            font-family: 'Share Tech Mono', monospace;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
+        body { background-color: #050505; color: #00ff41; font-family: 'Share Tech Mono', monospace; margin: 0; padding: 0; overflow-x: hidden; }
 
         /* Matrix Rain Effect Background */
-        .matrix-bg {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: repeating-linear-gradient(0deg, rgba(0, 255, 65, 0.03) 0px, rgba(0, 255, 65, 0.03) 1px, transparent 1px, transparent 2px);
-            z-index: -1; pointer-events: none;
-        }
+        .matrix-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: repeating-linear-gradient(0deg, rgba(0, 255, 65, 0.03) 0px, rgba(0, 255, 65, 0.03) 1px, transparent 1px, transparent 2px); z-index: -1; pointer-events: none; }
 
         /* --- LOGIN SCREEN CSS --- */
-        #login-screen {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-color: #050505; z-index: 9999;
-            display: flex; justify-content: center; align-items: center; flex-direction: column;
-        }
-        
-        .login-box {
-            background: #0a0a0a; border: 2px solid #00ff41; padding: 40px;
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.3); text-align: center; width: 300px;
-        }
-        
+        #login-screen { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #050505; z-index: 9999; display: flex; justify-content: center; align-items: center; flex-direction: column; }
+        .login-box { background: #0a0a0a; border: 2px solid #00ff41; padding: 40px; box-shadow: 0 0 30px rgba(0, 255, 65, 0.3); text-align: center; width: 300px; }
         .login-box h2 { color: #fff; text-shadow: 0 0 10px #ff003c; margin-top: 0; border-bottom: none; letter-spacing: 2px; }
         .login-box p { color: #888; font-size: 0.9em; margin-bottom: 30px; }
-        
         .input-group { margin-bottom: 20px; text-align: left; }
         .input-group label { display: block; color: #00ff41; margin-bottom: 5px; font-size: 0.8em; }
-        .input-group input {
-            width: 100%; background: #000; border: 1px solid #333; color: #00ff41;
-            padding: 10px; font-family: 'Share Tech Mono', monospace; box-sizing: border-box; outline: none;
-        }
+        .input-group input { width: 100%; background: #000; border: 1px solid #333; color: #00ff41; padding: 10px; font-family: 'Share Tech Mono', monospace; box-sizing: border-box; outline: none; }
         .input-group input:focus { border-color: #00ff41; box-shadow: 0 0 10px rgba(0, 255, 65, 0.2); }
-        
-        .login-btn {
-            background: transparent; color: #00ff41; border: 2px solid #00ff41;
-            padding: 10px 20px; font-family: 'Share Tech Mono', monospace; width: 100%;
-            cursor: pointer; font-size: 1.1em; transition: 0.3s; margin-top: 10px; text-transform: uppercase;
-        }
+        .login-btn { background: transparent; color: #00ff41; border: 2px solid #00ff41; padding: 10px 20px; font-family: 'Share Tech Mono', monospace; width: 100%; cursor: pointer; font-size: 1.1em; transition: 0.3s; margin-top: 10px; text-transform: uppercase; }
         .login-btn:hover { background: #00ff41; color: #000; }
-        
         #error-msg { color: #ff003c; margin-top: 15px; font-size: 0.85em; text-shadow: 0 0 5px #ff003c; min-height: 20px; }
+
+        /* --- DIGITAL IDENTITY LOCK (PORTRAIT) --- */
+        .identity-container { display: flex; justify-content: center; align-items: center; margin: 40px auto; max-width: 900px; padding: 0 20px; flex-direction: column; }
+        .portrait-frame { position: relative; width: 320px; height: auto; border: 2px solid #FFD700; box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); background-color: #000; overflow: hidden; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
+        .portrait-frame img { width: 100%; height: auto; filter: grayscale(100%) brightness(1.1) contrast(1.2) drop-shadow(0 0 10px rgba(255,215,0,0.7)); opacity: 0.9; position: relative; z-index: 1; }
+        
+        .portrait-frame::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: inherit;
+            animation: identity-pulse 1s infinite linear; z-index: 2; pointer-events: none;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M0 0h100v100H0z' fill='%23000'/%3E%3Cpath d='M5 5h90v90H5z' fill='none' stroke='%23ffd700' stroke-width='1.5'/%3E%3Cpath d='M15 15h70v70H15z' fill='none' stroke='%23ffd700' stroke-width='.75'/%3E%3C/svg%3E");
+            background-size: contain; background-repeat: no-repeat; background-position: center;
+        }
+        
+        .portrait-matrix-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient( 0deg, rgba(255, 215, 0, 0.05) 0px, rgba(255, 215, 0, 0.05) 1px, transparent 1px, transparent 2px ); z-index: 3; pointer-events: none; }
+        .identity-status { font-family: 'Share Tech Mono', monospace; font-size: 0.9em; color: #FFD700; background-color: #0a0a0a; border: 1px solid #333; padding: 10px 20px; text-shadow: 0 0 5px #FFD700; margin-top: 10px; text-transform: uppercase; }
+
+        @keyframes identity-pulse {
+            0% { border-color: #FFD700; box-shadow: inset 0 0 60px rgba(255, 215, 0, 0.6), 0 0 25px rgba(255, 215, 0, 0.4); } 
+            33% { border-color: #FFFFFF; box-shadow: inset 0 0 75px rgba(255, 255, 255, 0.7), 0 0 35px rgba(255, 255, 255, 0.5); } 
+            66% { border-color: #FF0000; box-shadow: inset 0 0 90px rgba(255, 0, 0, 0.8), 0 0 45px rgba(255, 0, 0, 0.6); } 
+            100% { border-color: #FFD700; box-shadow: inset 0 0 60px rgba(255, 215, 0, 0.6), 0 0 25px rgba(255, 215, 0, 0.4); }
+        }
+
+        /* --- MAIN CONTENT (Hidden by default) --- */
+        #main-content { display: none; }
+        header { text-align: center; padding: 60px 20px 30px; border-bottom: 2px solid #00ff41; box-shadow: 0 0 15px rgba(0, 255, 65, 0.2); background: rgba(5, 5, 5, 0.9); }
+        h1 { font-size: 3em; margin: 0; color: #ffffff; text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41; letter-spacing: 2px; text-transform: uppercase; }
+        .glitch-subtitle { font-size: 1.2em; color: #ff003c; margin-top: 10px; text-shadow: 0 0 5px #ff003c; }
+        
         /* --- NAVIGATION BUTTONS --- */
-        .nav-buttons-container {
-            display: flex; justify-content: center; gap: 20px; margin: 30px auto; padding: 0 20px; flex-wrap: wrap; max-width: 900px;
-        }
-        .nav-btn {
-            font-family: 'Share Tech Mono', monospace; font-size: 1.2em; padding: 15px 25px; text-decoration: none; text-transform: uppercase; transition: all 0.3s ease; text-align: center; flex: 1; min-width: 250px; letter-spacing: 1px;
-        }
+        .nav-buttons-container { display: flex; justify-content: center; gap: 20px; margin: 30px auto; padding: 0 20px; flex-wrap: wrap; max-width: 900px; }
+        .nav-btn { font-family: 'Share Tech Mono', monospace; font-size: 1.2em; padding: 15px 25px; text-decoration: none; text-transform: uppercase; transition: all 0.3s ease; text-align: center; flex: 1; min-width: 250px; letter-spacing: 1px; }
         .btn-primary { background: rgba(0, 255, 65, 0.05); color: #00ff41; border: 1px solid #00ff41; box-shadow: 0 0 10px rgba(0, 255, 65, 0.2); }
         .btn-primary:hover { background: #00ff41; color: #000; box-shadow: 0 0 20px rgba(0, 255, 65, 0.6); font-weight: bold; }
         .btn-danger { background: rgba(255, 0, 60, 0.05); color: #ff003c; border: 1px solid #ff003c; box-shadow: 0 0 10px rgba(255, 0, 60, 0.2); }
         .btn-danger:hover { background: #ff003c; color: #fff; box-shadow: 0 0 20px rgba(255, 0, 60, 0.8); font-weight: bold; }
-
-
         .btn-cyan { background: rgba(0, 229, 255, 0.05); color: #00e5ff; border: 1px solid #00e5ff; box-shadow: 0 0 10px rgba(0, 229, 255, 0.2); }
         .btn-cyan:hover { background: #00e5ff; color: #000; box-shadow: 0 0 20px rgba(0, 229, 255, 0.8); font-weight: bold; }
 
-
-        /* --- DIGITAL IDENTITY LOCK (PORTRAIT) --- */
-        .identity-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 40px auto;
-            max-width: 900px;
-            padding: 0 20px;
-            flex-direction: column; /* Stacks image and status text */
-        }
-
-        .portrait-frame {
-            position: relative;
-            width: 320px; /* Adjust size on mobile */
-            height: auto;
-            border: 2px solid #00ff41;
-            box-shadow: 0 0 25px rgba(0, 255, 65, 0.4);
-            background-color: #000;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .portrait-frame img {
-            width: 100%;
-            height: auto;
-            filter: grayscale(100%) brightness(1.1) contrast(1.2) drop-shadow(0 0 10px rgba(0,255,65,0.7)); /* B&W, stylized glow */
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* The complex neon digital overlay frame and pulsing effect */
-        .portrait-frame::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border-radius: inherit;
-            animation: identity-pulse 3s infinite alternate;
-            z-index: 2;
-            pointer-events: none;
-            background: 
-                /* Inner glow */
-                inset 0 0 60px rgba(0, 255, 65, 0.6),
-                /* Complex digital circuitry mask */
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M0 0h100v100H0z' fill='%23000'/%3E%3Cpath d='M5 5h90v90H5z' fill='none' stroke='%2300ff41' stroke-width='1.5'/%3E%3Cpath d='M15 15h70v70H15z' fill='none' stroke='%2300ff41' stroke-width='.75'/%3E%3C/svg%3E");
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-
-        /* Subtle Matrix rain overlay specifically for the portrait area */
-        .portrait-matrix-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-linear-gradient( 
-                0deg, 
-                rgba(0, 255, 65, 0.05) 0px, 
-                rgba(0, 255, 65, 0.05) 1px, 
-                transparent 1px, 
-                transparent 2px 
-            );
-            z-index: 3;
-        /* --- DIGITAL IDENTITY LOCK (PORTRAIT) --- */
-        .identity-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 40px auto;
-            max-width: 900px;
-            padding: 0 20px;
-            flex-direction: column;
-        }
-
-        .portrait-frame {
-            position: relative;
-            width: 320px;
-            height: auto;
-            border: 2px solid #FFD700;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
-            background-color: #000;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .portrait-frame img {
-            width: 100%;
-            height: auto;
-            filter: grayscale(100%) brightness(1.1) contrast(1.2) drop-shadow(0 0 10px rgba(255,215,0,0.7));
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* The complex neon digital overlay frame and pulsing effect - FASTER */
-        .portrait-frame::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border-radius: inherit;
-            animation: identity-pulse 1s infinite linear;
-            z-index: 2;
-            pointer-events: none;
-            background: 
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M0 0h100v100H0z' fill='%23000'/%3E%3Cpath d='M5 5h90v90H5z' fill='none' stroke='%23ffd700' stroke-width='1.5'/%3E%3Cpath d='M15 15h70v70H15z' fill='none' stroke='%23ffd700' stroke-width='.75'/%3E%3C/svg%3E");
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-
-        /* Subtle Matrix rain overlay specifically for the portrait area */
-        .portrait-matrix-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-linear-gradient( 
-                0deg, 
-                rgba(255, 215, 0, 0.05) 0px, 
-                rgba(255, 215, 0, 0.05) 1px, 
-                transparent 1px, 
-                transparent 2px 
-            );
-            z-index: 3;
-            pointer-events: none;
-        }
-
-        /* Status text styling */
-        .identity-status {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.9em;
-            color: #FFD700;
-            background-color: #0a0a0a;
-            border: 1px solid #333;
-            padding: 10px 20px;
-            text-shadow: 0 0 5px #FFD700;
-            margin-top: 10px;
-            text-transform: uppercase;
-        }
-
-        /* --- NEW MULTI-COLOR IDENTITY PULSE ANIMATION --- */
-        @keyframes identity-pulse {
-            0% { 
-                border-color: #FFD700; 
-                box-shadow: inset 0 0 60px rgba(255, 215, 0, 0.6), 0 0 25px rgba(255, 215, 0, 0.4); 
-            } 
-            33% { 
-                border-color: #FFFFFF; 
-                box-shadow: inset 0 0 75px rgba(255, 255, 255, 0.7), 0 0 35px rgba(255, 255, 255, 0.5); 
-            } 
-            66% { 
-                border-color: #FF0000; 
-                box-shadow: inset 0 0 90px rgba(255, 0, 0, 0.8), 0 0 45px rgba(255, 0, 0, 0.6); 
-            } 
-            100% { 
-                border-color: #FFD700; 
-                box-shadow: inset 0 0 60px rgba(255, 215, 0, 0.6), 0 0 25px rgba(255, 215, 0, 0.4); 
-            }
-        }
-
-
-        
-        /* --- MAIN CONTENT (Hidden by default) --- */
-        #main-content { display: none; }
-
-        header { text-align: center; padding: 60px 20px 30px; border-bottom: 2px solid #00ff41; box-shadow: 0 0 15px rgba(0, 255, 65, 0.2); background: rgba(5, 5, 5, 0.9); }
-        h1 { font-size: 3em; margin: 0; color: #ffffff; text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41; letter-spacing: 2px; text-transform: uppercase; }
-        .glitch-subtitle { font-size: 1.2em; color: #ff003c; margin-top: 10px; text-shadow: 0 0 5px #ff003c; }
         .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
         .terminal-window { background-color: #0a0a0a; border: 1px solid #333; border-radius: 5px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.8); margin-bottom: 40px; }
         .terminal-header { background-color: #1a1a1a; padding: 10px; border-bottom: 1px solid #333; display: flex; align-items: center; }
@@ -272,17 +93,14 @@
         <div class="login-box">
             <h2>RESTRICTED AREA</h2>
             <p>Sami-Server Authentication Required</p>
-            
             <div class="input-group">
                 <label>USERNAME</label>
                 <input type="text" id="usernameInput" autocomplete="off" spellcheck="false">
             </div>
-            
             <div class="input-group">
                 <label>PASSWORD</label>
                 <input type="password" id="passwordInput">
             </div>
-            
             <button class="login-btn" onclick="checkLogin()">INITIATE CONNECTION</button>
             <div id="error-msg"></div>
         </div>
@@ -294,27 +112,24 @@
             <div class="glitch-subtitle">>> ELITE CYBER EXPLOITATION & RECOVERY <<</div>
         </header>
 
-                
         <div class="nav-buttons-container">
-
-            
             <a href="apps.html" class="nav-btn btn-primary">[ ACCESS MY APPS / PAYLOADS ]</a>
             <a href="knowledge.html" class="nav-btn btn-danger">[ ILLEGAL KNOWLEDGE ]</a>
             <a href="lmc.html" class="nav-btn btn-cyan">[ LMC CONFIGS (XML) ]</a>
-
         </div>
-                        <div class="identity-container">
-            <div class="portrait-frame">
-                <img src="Sami_Identity_v1.png" alt="Sami Ul Haq - Exploitation Specialist">
-                <div class="portrait-matrix-overlay"></div>
-            </div>
-            <div class="identity-status">
-                sami_verication: OK | access_level: ELITE | threat_level: HIGH
-            </div>
-                        </div>
-                
-                
+
         <div class="container">
+            
+            <div class="identity-container">
+                <div class="portrait-frame">
+                    <img src="Sami_Identity_v1.png" alt="Sami Ul Haq - Exploitation Specialist">
+                    <div class="portrait-matrix-overlay"></div>
+                </div>
+                <div class="identity-status">
+                    sami_verication: OK | access_level: ELITE | threat_level: HIGH
+                </div>
+            </div>
+
             <div class="terminal-window">
                 <div class="terminal-header">
                     <div class="terminal-button btn-red"></div>
@@ -366,8 +181,6 @@
                     </div>
                 </div>
             </div>
-            
-            
         </div>
 
         <footer>
@@ -377,20 +190,17 @@
 
     <script>
         function checkLogin() {
-            // Yahan apna Username aur Password set karo!
-            var correctUser = "client";  // <-- USERNAME
-            var correctPass = "sami123"; // <-- PASSWORD
+            var correctUser = "client";  
+            var correctPass = "sami123"; 
             
             var userEntered = document.getElementById("usernameInput").value;
             var passEntered = document.getElementById("passwordInput").value;
             var errorDiv = document.getElementById("error-msg");
 
             if (userEntered === correctUser && passEntered === correctPass) {
-                // Agar password theek hai to login screen ghaib aur website on!
                 document.getElementById("login-screen").style.display = "none";
                 document.getElementById("main-content").style.display = "block";
             } else {
-                // Agar galat hai to error
                 errorDiv.innerText = ">> ACCESS DENIED. UNAUTHORIZED ATTEMPT LOGGED. <<";
             }
         }
