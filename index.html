@@ -25,26 +25,26 @@
         .login-btn:hover { background: #00ff41; color: #000; }
         #error-msg { color: #ff003c; margin-top: 15px; font-size: 0.85em; text-shadow: 0 0 5px #ff003c; min-height: 20px; }
 
-        /* --- DIGITAL IDENTITY LOCK (PORTRAIT) --- */
+        /* --- DIGITAL IDENTITY LOCK (PORTRAIT) - FIXED VERSION --- */
         .identity-container { display: flex; justify-content: center; align-items: center; margin: 40px auto; max-width: 900px; padding: 0 20px; flex-direction: column; }
-        .portrait-frame { position: relative; width: 320px; height: auto; border: 2px solid #FFD700; box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); background-color: #000; overflow: hidden; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
-        .portrait-frame img { width: 100%; height: auto; filter: grayscale(100%) brightness(1.1) contrast(1.2) drop-shadow(0 0 10px rgba(255,215,0,0.7)); opacity: 0.9; position: relative; z-index: 1; }
         
-        .portrait-frame::after {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: inherit;
-            animation: identity-pulse 1s infinite linear; z-index: 2; pointer-events: none;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M0 0h100v100H0z' fill='%23000'/%3E%3Cpath d='M5 5h90v90H5z' fill='none' stroke='%23ffd700' stroke-width='1.5'/%3E%3Cpath d='M15 15h70v70H15z' fill='none' stroke='%23ffd700' stroke-width='.75'/%3E%3C/svg%3E");
-            background-size: contain; background-repeat: no-repeat; background-position: center;
+        .portrait-frame { 
+            position: relative; width: 320px; height: auto; 
+            border: 2px solid #FFD700; background-color: transparent; 
+            overflow: hidden; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; 
+            animation: identity-pulse 1.5s infinite linear; 
         }
+        
+        .portrait-frame img { width: 100%; height: auto; filter: grayscale(100%) brightness(1.1) contrast(1.2); opacity: 0.9; position: relative; z-index: 1; display: block; }
         
         .portrait-matrix-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient( 0deg, rgba(255, 215, 0, 0.05) 0px, rgba(255, 215, 0, 0.05) 1px, transparent 1px, transparent 2px ); z-index: 3; pointer-events: none; }
         .identity-status { font-family: 'Share Tech Mono', monospace; font-size: 0.9em; color: #FFD700; background-color: #0a0a0a; border: 1px solid #333; padding: 10px 20px; text-shadow: 0 0 5px #FFD700; margin-top: 10px; text-transform: uppercase; }
 
         @keyframes identity-pulse {
-            0% { border-color: #FFD700; box-shadow: inset 0 0 60px rgba(255, 215, 0, 0.6), 0 0 25px rgba(255, 215, 0, 0.4); } 
-            33% { border-color: #FFFFFF; box-shadow: inset 0 0 75px rgba(255, 255, 255, 0.7), 0 0 35px rgba(255, 255, 255, 0.5); } 
-            66% { border-color: #FF0000; box-shadow: inset 0 0 90px rgba(255, 0, 0, 0.8), 0 0 45px rgba(255, 0, 0, 0.6); } 
-            100% { border-color: #FFD700; box-shadow: inset 0 0 60px rgba(255, 215, 0, 0.6), 0 0 25px rgba(255, 215, 0, 0.4); }
+            0% { border-color: #FFD700; box-shadow: 0 0 30px rgba(255, 215, 0, 0.6), inset 0 0 20px rgba(255, 215, 0, 0.3); } 
+            33% { border-color: #FFFFFF; box-shadow: 0 0 45px rgba(255, 255, 255, 0.8), inset 0 0 30px rgba(255, 255, 255, 0.4); } 
+            66% { border-color: #FF0000; box-shadow: 0 0 60px rgba(255, 0, 0, 0.9), inset 0 0 40px rgba(255, 0, 0, 0.5); } 
+            100% { border-color: #FFD700; box-shadow: 0 0 30px rgba(255, 215, 0, 0.6), inset 0 0 20px rgba(255, 215, 0, 0.3); }
         }
 
         /* --- MAIN CONTENT (Hidden by default) --- */
@@ -83,11 +83,15 @@
         .contact-info { text-align: center; margin-top: 20px; font-size: 1.2em; }
         .contact-info a { color: #ff003c; text-decoration: none; text-shadow: 0 0 5px #ff003c; transition: 0.3s; }
         .contact-info a:hover { color: #ffffff; text-shadow: 0 0 10px #ffffff; }
-        footer { text-align: center; padding: 20px; color: #444; font-size: 0.8em; margin-top: 50px; border-top: 1px solid #111; }
+        footer { text-align: center; padding: 20px; color: #444; font-size: 0.8em; margin-top: 50px; border-bottom: 50px solid transparent; border-top: 1px solid #111; }
     </style>
 </head>
 <body>
     <div class="matrix-bg"></div>
+
+    <audio id="hacker-bgm" loop>
+        <source src="sami_music.mp3" type="audio/mpeg">
+    </audio>
 
     <div id="login-screen">
         <div class="login-box">
@@ -196,10 +200,17 @@
             var userEntered = document.getElementById("usernameInput").value;
             var passEntered = document.getElementById("passwordInput").value;
             var errorDiv = document.getElementById("error-msg");
+            var bgMusic = document.getElementById("hacker-bgm");
 
             if (userEntered === correctUser && passEntered === correctPass) {
+                // Hide login, show content
                 document.getElementById("login-screen").style.display = "none";
                 document.getElementById("main-content").style.display = "block";
+                
+                // Play the music!
+                bgMusic.play().catch(function(error) {
+                    console.log("Audio playback was prevented by browser:", error);
+                });
             } else {
                 errorDiv.innerText = ">> ACCESS DENIED. UNAUTHORIZED ATTEMPT LOGGED. <<";
             }
