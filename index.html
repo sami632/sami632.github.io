@@ -104,6 +104,31 @@
         .contact-info a { color: #ff003c; text-decoration: none; text-shadow: 0 0 5px #ff003c; transition: 0.3s; }
         .contact-info a:hover { color: #ffffff; text-shadow: 0 0 10px #ffffff; }
         footer { text-align: center; padding: 20px; color: #444; font-size: 0.8em; margin-top: 50px; border-bottom: 50px solid transparent; border-top: 1px solid #111; }
+
+
+        /* --- ISI Black-Ops Theme Extras --- */
+        .tactical-guns-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; opacity: 0.15; }
+        .gun { position: absolute; fill: #00ff41; animation: gun-drift 10s infinite alternate linear; }
+        @keyframes gun-drift {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0.2; }
+            100% { transform: translate(50px, 30px) rotate(5deg); opacity: 0.5; }
+        }
+
+        #isi-logo-fixed { position: fixed; bottom: 30px; left: 30px; width: 60px; height: 60px; cursor: pointer; z-index: 9000; fill: #ff003c; animation: logo-pulse-move 3s infinite ease-in-out; transition: all 0.3s ease; }
+        #isi-logo-fixed:hover { fill: #00ff41; transform: scale(1.15); box-shadow: 0 0 15px rgba(0, 255, 65, 0.5); }
+        @keyframes logo-pulse-move {
+            0% { transform: translate(0, 0); opacity: 0.7; }
+            50% { transform: translate(-10px, -10px); opacity: 1; fill: #ff003c; }
+            100% { transform: translate(0, 0); opacity: 0.7; fill: #004a10; }
+        }
+
+        #verification-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.9); z-index: 10000; justify-content: center; align-items: center; color: #ff003c; text-align: center; }
+        .modal-box { border: 2px solid #ff003c; background: #050505; padding: 40px; box-shadow: 0 0 30px rgba(255, 0, 60, 0.5); }
+        .close-modal { position: absolute; top: 10px; right: 20px; color: #888; font-size: 2em; cursor: pointer; }
+        .close-modal:hover { color: #ff003c; }
+
+
+        
     </style>
 </head>
 <body>
@@ -243,5 +268,36 @@
             }
         }
     </script>
+
+                <div class="tactical-guns-overlay">
+        <svg class="gun" style="top: 20vh; left: 10vw; width: 200px;" viewBox="0 0 24 24"><path d="M11 20H3c-1.1 0-2-.9-2-2v-5c0-1.1.9-2 2-2h8c.55 0 1 .45 1 1v7c0 .55-.45 1-1 1zm8-18c-1.1 0-2 .9-2 2v2c0 .55.45 1 1 1h2c.55 0 1-.45 1-1V4c0-1.1-.9-2-2-2zm2.1 11.4l-1.6-1.6c-.39-.39-1.01-.39-1.4 0l-1.6 1.6c-.39.39-.39 1.01 0 1.4l1.6 1.6c.39.39 1.01.39 1.4 0l1.6-1.6c.39-.39.39-1.01 0-1.4zM11 8H3c-1.1 0-2 .9-2 2v5c0 1.1.9 2 2 2h8c.55 0 1-.45 1-1v-7c0-.55-.45-1-1-1zm10-4c0-.55-.45-1-1-1h-2c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1h2c.55 0 1-.45 1-1V4z"/></svg>
+        <svg class="gun" style="top: 50vh; right: 15vw; width: 150px; animation-delay: 5s;" viewBox="0 0 24 24"><path d="M11 20H3c-1.1 0-2-.9-2-2v-5c0-1.1.9-2 2-2h8c.55 0 1 .45 1 1v7c0 .55-.45 1-1 1zm8-18c-1.1 0-2 .9-2 2v2c0 .55.45 1 1 1h2c.55 0 1-.45 1-1V4c0-1.1-.9-2-2-2zm2.1 11.4l-1.6-1.6c-.39-.39-1.01-.39-1.4 0l-1.6 1.6c-.39.39-.39 1.01 0 1.4l1.6 1.6c.39.39 1.01.39 1.4 0l1.6-1.6c.39-.39.39-1.01 0-1.4zM11 8H3c-1.1 0-2 .9-2 2v5c0 1.1.9 2 2 2h8c.55 0 1-.45 1-1v-7c0-.55-.45-1-1-1zm10-4c0-.55-.45-1-1-1h-2c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1h2c.55 0 1-.45 1-1V4z"/></svg>
+    </div>
+
+    <svg id="isi-logo-fixed" onclick="showVerificationFailed()" viewBox="0 0 100 100" title="Click for AI Verification">
+        <circle cx="50" cy="50" r="48" stroke-width="2" fill="none" stroke="currentColor"/>
+        <text x="50%" y="50%" font-family="Share Tech Mono" font-size="20" fill="currentColor" text-anchor="middle" dy=".3em">I S I</text>
+        <path d="M50 10 L60 40 L90 40 L65 60 L75 90 L50 70 L25 90 L35 60 L10 40 L40 40 Z" fill="currentColor" transform="scale(0.3) translate(110, 110)"/>
+    </svg>
+
+    <div id="verification-modal" onclick="closeModal()">
+        <span class="close-modal" onclick="closeModal()">×</span>
+        <div class="modal-box">
+            <h1 style="color: #ff003c; text-shadow: 0 0 10px #ff003c;">>> SYSTEM ERROR <<</h1>
+            <p style="font-size: 1.5em; letter-spacing: 2px;">[ AI VERIFICATION FAILED ]</p>
+            <p style="color: #fff; font-size: 1.2em; border-bottom: 1px dashed #ff003c;">آئی ایس آئی ویریفکیشن فیلڈ</p>
+            <p style="font-size: 0.9em; color: #888;">UNAUTHORIZED OPERATOR. COUNTERMEASURES INITIATED.</p>
+        </div>
+    </div>
+
+    <script>
+        function showVerificationFailed() {
+            document.getElementById("verification-modal").style.display = "flex";
+        }
+        function closeModal() {
+            document.getElementById("verification-modal").style.display = "none";
+        }
+    </script>
+
 </body>
 </html>
